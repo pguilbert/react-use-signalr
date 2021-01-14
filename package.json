@@ -1,0 +1,29 @@
+{
+  "name": "react-use-signalr",
+  "version": "0.0.0",
+  "description": "React hooks for SignalR",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pguilbert/react-use-signalr.git"
+  },
+  "author": "Paul Guilbert <guilbert.paul@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/pguilbert/react-use-signalr/issues"
+  },
+  "homepage": "https://github.com/pguilbert/react-use-signalr#readme",
+  "dependencies": {
+    "@microsoft/signalr": "^5.0.2"
+  },
+  "peerDependencies": {
+    "react": ">= 16.8.0"
+  }
+}
