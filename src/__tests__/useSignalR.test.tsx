@@ -29,4 +29,13 @@ describe('useSignalR', () => {
         expect(startFn).toBeCalled();
         expect(result.current.error).toBe(error);
     });
+
+    it("should start/stop on component mount/unmount", async () => {
+        const { start: startFn, stop: stopFn } = hubConnectionMock;
+
+        const { result, unmount } = renderHook(() => useSignalR(hubConnectionMock));
+        expect(startFn).toBeCalled();
+        unmount();
+        expect(stopFn).toBeCalled();
+    })
 });
