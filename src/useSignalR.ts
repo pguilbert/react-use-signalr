@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 /**
  * Start/Stop the provided hub connection (on connection change or when the component is unmounted)
+ * @param {HubConnection} hubConnection The signalR hub connection
  * @return {HubConnection} the current signalr connection
  * @return {any} the signalR error in case the start does not work
  */

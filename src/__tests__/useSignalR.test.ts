@@ -37,5 +37,5 @@ describe('useSignalR', () => {
         expect(startFn).toBeCalled();
         unmount();
         expect(stopFn).toBeCalled();
-    })
+    });
 });
