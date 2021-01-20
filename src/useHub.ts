@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
  * @return {HubConnection} the current signalr connection
  * @return {any} the signalR error in case the start does not work
  */
-export function useSignalR(hubConnection?: HubConnection) {
+export function useHub(hubConnection?: HubConnection) {
     const [hubConnectionState, setHubConnectionState] = useState<HubConnectionState>(hubConnection?.state ?? HubConnectionState.Disconnected);
     const [error, setError] = useState();
 

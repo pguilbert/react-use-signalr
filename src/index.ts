@@ -1,2 +1,2 @@
-export { useSignalR } from './useSignalR'
+export { useHub } from './useHub'
 export { useHubMethod } from './useHubMethod'
