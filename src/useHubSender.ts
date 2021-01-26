@@ -1,22 +1,22 @@
 import { HubConnection } from "@microsoft/signalr";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type HubCallbackState<T = any> = {
+type HubSenderState<T = any> = {
     loading: boolean,
     data?: T,
     error?: any
 }
-const initialState : HubCallbackState = {
+const initialState : HubSenderState = {
     loading: false
 }
 
 /**
- * Invokes a hub method on the server and provide the async state (loading & error)
+ * Provide an "invoke" function to invokes a hub method on the server and provide the async state (loading & error)
  * @param hubConnection The hub connection to use
  * @param methodName The name of the server method to invoke.
  */
-export function useHubCallback<T>(hubConnection: HubConnection, methodName: string) {
-    const [state, setState] = useState<HubCallbackState<T>>(initialState);
+export function useHubSender<T>(hubConnection: HubConnection, methodName: string) {
+    const [state, setState] = useState<HubSenderState<T>>(initialState);
     const isMounted = useRef(true);
 
     const setStateIfMounted: typeof setState = useCallback((value) => {
