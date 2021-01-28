@@ -1,8 +1,8 @@
-import { useSignalR } from "../useSignalR";
+import { useHub } from "../useHub";
 import { renderHook, act } from '@testing-library/react-hooks'
 import { HubConnection, HubConnectionState } from "@microsoft/signalr";
 
-describe('useSignalR', () => {
+describe('useHub', () => {
     const hubConnectionMock = { 
         state: HubConnectionState.Disconnected,
         start: jest.fn(() => new Promise(() => {})),
@@ -13,7 +13,7 @@ describe('useSignalR', () => {
     } as unknown as HubConnection;
 
     it('should render when the connection is undefined.', () => {
-        const { result } = renderHook(() => useSignalR());
+        const { result } = renderHook(() => useHub());
 
         expect(result.current.hubConnectionState).toBe(HubConnectionState.Disconnected);
         expect(result.current.error).toBeUndefined();
@@ -24,7 +24,7 @@ describe('useSignalR', () => {
         const mock = { ... hubConnectionMock, start: jest.fn(() => new Promise(() => { throw error; })) } as unknown as HubConnection;
         const { start: startFn } = mock;
         
-        const { result, waitForNextUpdate } = renderHook(() => useSignalR(mock));
+        const { result, waitForNextUpdate } = renderHook(() => useHub(mock));
         await waitForNextUpdate();
         expect(startFn).toBeCalled();
         expect(result.current.error).toBe(error);
@@ -33,7 +33,7 @@ describe('useSignalR', () => {
     it("should start/stop on component mount/unmount", async () => {
         const { start: startFn, stop: stopFn } = hubConnectionMock;
 
-        const { result, unmount } = renderHook(() => useSignalR(hubConnectionMock));
+        const { result, unmount } = renderHook(() => useHub(hubConnectionMock));
         expect(startFn).toBeCalled();
         unmount();
         expect(stopFn).toBeCalled();
