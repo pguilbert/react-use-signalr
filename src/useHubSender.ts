@@ -15,7 +15,7 @@ const initialState : HubSenderState = {
  * @param hubConnection The hub connection to use
  * @param methodName The name of the server method to invoke.
  */
-export function useHubSender<T>(hubConnection: HubConnection, methodName: string) {
+export function useHubSender<T>(hubConnection: HubConnection | undefined, methodName: string) {
     const [state, setState] = useState<HubSenderState<T>>(initialState);
     const isMounted = useRef(true);
 
@@ -29,9 +29,14 @@ export function useHubSender<T>(hubConnection: HubConnection, methodName: string
         setStateIfMounted(s => ({...s, loading: true}));
 
         try {
-            const data = await hubConnection.invoke<T>(methodName, ...args);
-            setStateIfMounted(s => ({...s, data: data, loading: false, error: undefined}));
-            return data;
+            if(hubConnection) {
+                const data = await hubConnection.invoke<T>(methodName, ...args);
+                setStateIfMounted(s => ({...s, data: data, loading: false, error: undefined}));
+                return data;
+            }
+            else {
+                throw new Error('hubConnection is not defined');
+            }
         }
         catch(e) {
             setStateIfMounted(s => ({...s, error: e, loading: false}));
