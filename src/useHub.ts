@@ -15,7 +15,12 @@ export function useHub(hubConnection?: HubConnection) {
         setError(undefined);
 
         if (!hubConnection) {
+            setHubConnectionState(HubConnectionState.Disconnected);
             return;
+        }
+
+        if(hubConnection.state !== hubConnectionState) {
+            setHubConnectionState(hubConnection.state);
         }
 
         let isMounted = true;

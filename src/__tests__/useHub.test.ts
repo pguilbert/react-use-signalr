@@ -1,20 +1,31 @@
 import { useHub } from "../useHub";
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react-hooks'
 import { HubConnection, HubConnectionState } from "@microsoft/signalr";
 
 describe('useHub', () => {
     const hubConnectionMock = { 
         state: HubConnectionState.Disconnected,
-        start: jest.fn(() => new Promise(() => {})),
+        start: jest.fn(() => Promise.reject()),
         stop: jest.fn(() => new Promise(() => {})),
         onclose: jest.fn((callback: (error?: Error) => void) => {}),
         onreconnected: jest.fn((callback: (error?: Error) => void) => {}),
         onreconnecting: jest.fn((callback: (error?: Error) => void) => {}),
     } as unknown as HubConnection;
 
-    it('should render when the connection is undefined.', () => {
-        const { result } = renderHook(() => useHub());
+    it('should render when the connection is undefined.', async () => {
+        let mock : HubConnection | undefined = undefined;
 
+        //the connection is undefined on the first render. Ok?
+        const { result, rerender } = renderHook(() => useHub(mock));
+        expect(result.current.hubConnectionState).toBe(HubConnectionState.Disconnected);
+        expect(result.current.error).toBeUndefined();
+
+        //the connection change from defined to undefined. Ok?
+        mock = {... hubConnectionMock, state: HubConnectionState.Connected} as unknown as HubConnection;;
+        rerender();
+        expect(result.current.hubConnectionState).toBe(HubConnectionState.Connected);
+        mock = undefined;
+        rerender();
         expect(result.current.hubConnectionState).toBe(HubConnectionState.Disconnected);
         expect(result.current.error).toBeUndefined();
     });
