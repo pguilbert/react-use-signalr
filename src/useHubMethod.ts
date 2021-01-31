@@ -1,12 +1,12 @@
 import { HubConnection } from "@microsoft/signalr";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type HubSenderState<T = any> = {
+type HubMethodState<T = any> = {
     loading: boolean,
     data?: T,
     error?: any
 }
-const initialState : HubSenderState = {
+const initialState : HubMethodState = {
     loading: false
 }
 
@@ -15,8 +15,8 @@ const initialState : HubSenderState = {
  * @param hubConnection The hub connection to use
  * @param methodName The name of the server method to invoke.
  */
-export function useHubSender<T>(hubConnection: HubConnection | undefined, methodName: string) {
-    const [state, setState] = useState<HubSenderState<T>>(initialState);
+export function useHubMethod<T>(hubConnection: HubConnection | undefined, methodName: string) {
+    const [state, setState] = useState<HubMethodState<T>>(initialState);
     const isMounted = useRef(true);
 
     const setStateIfMounted: typeof setState = useCallback((value) => {

@@ -7,7 +7,7 @@ import { useEffect } from "react";
  * @param {string} methodName The name of the hub method to define.
  * @param {Function} method The handler that will be raised when the hub method is invoked.
  */
-export function useHubReceiver(hubConnection: HubConnection | undefined, methodName: string, method: (...args: any[]) => void) {
+export function useClientMethod(hubConnection: HubConnection | undefined, methodName: string, method: (...args: any[]) => void) {
     useEffect(() => {
         if(!hubConnection) {
             return;

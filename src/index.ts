@@ -1,3 +1,3 @@
 export { useHub } from './useHub'
-export { useHubReceiver } from './useHubReceiver'
-export { useHubSender } from './useHubSender'
+export { useClientMethod } from './useClientMethod'
+export { useHubMethod } from './useHubMethod'

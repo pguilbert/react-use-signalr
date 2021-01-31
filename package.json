@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "prepare": "tsc",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",

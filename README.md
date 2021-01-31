@@ -15,6 +15,7 @@ npm install @microsoft/signalr --save
 ```
 
 ### 3. Setting up the HubConnection
+Use the HubConnectionBuilder descibed in the [Microsoft documentation](https://docs.microsoft.com/en-us/aspnet/core/signalr/javascript-client) to build the connection.
 
 ```javascript
 const signalRConnection = new HubConnectionBuilder()
@@ -30,16 +31,16 @@ To start the SignalR connection, pass the HubConnection instance to the useHub h
 const { hubConnectionState, error } = useHub(signalRConnection);
 ```
 
-### 5. Act on 
+### 5. Call client methods from the hub
 ```javascript
-useHubReceiver(hubConnection, "ReceiveMessage", (user, message) => {
+useClientMethod(signalRConnection, "ReceiveMessage", (user, message) => {
     [...]
 });
 ```
 
-### 6. Invoke server method
+### 6. Call hub methods from the client
 ```javascript
-const { invoke, loading, error } = useHubSender(hubConnection, "SendMessage");
+const { invoke, loading, error } = useHubMethod(signalRConnection, "SendMessage");
 
 [...]
 
