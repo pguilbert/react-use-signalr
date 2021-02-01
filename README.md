@@ -1,5 +1,7 @@
 # react-use-signalr
 
+![Node.js CI](https://github.com/pguilbert/react-use-signalr/workflows/Node.js%20CI/badge.svg)
+
 ## Getting Started
 ### 1. Install the hooks
 
