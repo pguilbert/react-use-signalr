@@ -1,6 +1,6 @@
 {
   "name": "react-use-signalr",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React hooks for SignalR",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,7 +23,7 @@
   "homepage": "https://github.com/pguilbert/react-use-signalr#readme",
   "peerDependencies": {
     "@microsoft/signalr": "^6.0.1",
-    "react": "^16.8.0 || ^17.0.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
     "@microsoft/signalr": "^6.0.1",
