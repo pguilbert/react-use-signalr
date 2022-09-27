@@ -29,9 +29,15 @@ export function useHub(hubConnection?: HubConnection) {
                 setHubConnectionState(hubConnection?.state);
             }
         }
-        hubConnection.onclose(onStateUpdatedCallback);
+
+        const onConnectErrorCallback = (error?: Error | undefined) => {
+            onStateUpdatedCallback();
+            setError(error?.message);
+        }
+
+        hubConnection.onclose(onConnectErrorCallback);
         hubConnection.onreconnected(onStateUpdatedCallback);
-        hubConnection.onreconnecting(onStateUpdatedCallback);
+        hubConnection.onreconnecting(onConnectErrorCallback);
 
         if (hubConnection.state === HubConnectionState.Disconnected) {
             const startPromise = hubConnection
